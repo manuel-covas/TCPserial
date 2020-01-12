@@ -2,7 +2,7 @@ import serial
 import socket
 
 TCP_ADDRESS = "0.0.0.0"
-TCP_BUFFER_SIZE = 2**4
+TCP_BUFFER_SIZE = 2**6
 
 
 serial_port = serial.Serial()
@@ -22,12 +22,16 @@ tcp_socket.listen()
 while True:
     print("Waiting for connection...")
     connection, addr = tcp_socket.accept()
+    connection.settimeout(0.010)
     print("Connection from "+"".join(tuple(map(str, addr))))
 
     while True:
-        data = connection.recv(TCP_BUFFER_SIZE)
-        written = serial_port.write(data)
-        print(">> "+str(written)+" bytes")
+        try:
+            data = connection.recv(TCP_BUFFER_SIZE)
+            written = serial_port.write(data)
+            print(">> "+str(written)+" bytes")
+        except:
+            pass
 
         if serial_port.in_waiting != 0:
             data = serial_port.read(serial_port.in_waiting)
