@@ -1,6 +1,14 @@
 # TCPserial
 Python script to create a TCP server on the specified port to expose a serial port to the network.
 
+# Dependencies
+Listed in requirements.txt\
+Currently requires pyserial (locked on version 3.5 since it's what I tested it against)\
+In the project directory, install with pip:
+```
+pip install -r requirements.txt
+```
+
 Personally, I'm using this as a workaround to Windows serial ports in Windows Subsystem for Linux (WSL) to flash chips with ESP-IDF.
 Connection to a socket can be achieved by specifying a URI instead of the port name/path like so:
 ```
